@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Pokedex</string>
+    <string name="pokedex_loading">Pokedex loading....</string>
+    <string name="this_action">action</string>
+    <string name="powered_by_kdnt">com.kdnt.pokedex</string>
+    <string name="weight">Weight</string>
+    <string name="height">Height</string>
+</resources>
