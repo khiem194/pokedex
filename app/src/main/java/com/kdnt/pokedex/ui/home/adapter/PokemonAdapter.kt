@@ -9,7 +9,7 @@ import com.kdnt.pokedex.databinding.ItemPokemonBinding
 
 class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() {
     private var mListPokemon = mutableListOf<Pokemon>()
-    var onClickItemPokemon: ((pokemon : Pokemon) -> Unit)? = null
+    var onClickItemPokemon: ((pokemon: Pokemon) -> Unit)? = null
 
     fun setData(list: MutableList<Pokemon>) {
         mListPokemon.clear()
@@ -33,7 +33,9 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() 
             .centerCrop()
             .thumbnail(0.1f)
             .into(holder.binding.image)
-        holder.itemView.setOnClickListener { onClickItemPokemon?.invoke(mListPokemon[holder.layoutPosition]) }
+        holder.itemView.setOnClickListener {
+            onClickItemPokemon?.invoke(mListPokemon[holder.layoutPosition])
+        }
     }
 
     override fun getItemCount(): Int = mListPokemon.size

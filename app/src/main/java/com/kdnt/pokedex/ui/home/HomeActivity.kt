@@ -14,31 +14,32 @@ import com.kdnt.pokedex.ui.home.adapter.PokemonAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.FieldPosition
 
-class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>(){
-    private lateinit var mAdapter : PokemonAdapter
+class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>() {
+    private lateinit var mAdapter: PokemonAdapter
     private var mListPokemon = mutableListOf<Pokemon>()
-    companion object{
+
+    companion object {
         fun openActivity(context: Context): Intent = Intent(context, HomeActivity::class.java)
     }
+
     override fun getLayoutResId(): Int = R.layout.activity_home
 
     override val mViewModel: HomeViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mViewModel.getListFolderLiveData().observe(this, {
-            mListPokemon.clear()
-            mListPokemon.addAll(it)
-            mAdapter.setData(it)
-        })
-
-        mViewBinding.rcvPokemon.layoutManager = GridLayoutManager(this,3)
+        mViewBinding.rcvPokemon.layoutManager = GridLayoutManager(this, 3)
         mAdapter = PokemonAdapter()
         mAdapter.onClickItemPokemon = this::clickDetailPokemon
         mViewBinding.rcvPokemon.adapter = mAdapter
+        mViewModel.getListPokemon {
+            runOnUiThread {
+                mAdapter.setData(it)
+            }
+        }
     }
 
-    private fun clickDetailPokemon(pokemon : Pokemon){
+    private fun clickDetailPokemon(pokemon: Pokemon) {
         val intent = Intent(this, DetailsActivity::class.java)
         intent.putExtra("id", pokemon)
         startActivity(intent)

@@ -6,5 +6,5 @@ data class ListPokemon(
     @SerializedName("count") val count : Int,
     @SerializedName("next") val next : String,
     @SerializedName("previous") val previous : String,
-    @SerializedName("results") val results : MutableList<Pokemon>,
+    @SerializedName("results") val results : ArrayList<Pokemon>,
 )
