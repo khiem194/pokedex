@@ -44,6 +44,12 @@ class DetailsActivity : BaseActivity<DetailsViewModel, ActivityDetailsBinding>()
             mViewBinding.type1.text = pokemonInfo.types[0].type.name
             mViewBinding.type2.visibility = View.GONE
         }
+        mViewBinding.progressHp.progress = pokemonInfo.pokemonStats[0].pokemonBaseStat
+        mViewBinding.progressAtk.progress = pokemonInfo.pokemonStats[1].pokemonBaseStat
+        mViewBinding.progressDef.progress = pokemonInfo.pokemonStats[2].pokemonBaseStat
+        mViewBinding.progressSpecialAttack.progress = pokemonInfo.pokemonStats[3].pokemonBaseStat
+        mViewBinding.progressSpecialDefense.progress = pokemonInfo.pokemonStats[4].pokemonBaseStat
+        mViewBinding.progressSpeed.progress = pokemonInfo.pokemonStats[5].pokemonBaseStat
     }
 }
 

@@ -1,8 +1,12 @@
 package com.kdnt.pokedex.ui.home
 
+import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kdnt.pokedex.R
@@ -16,7 +20,7 @@ import java.text.FieldPosition
 
 class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>() {
     private lateinit var mAdapter: PokemonAdapter
-    private var mListPokemon = mutableListOf<Pokemon>()
+    private lateinit var searchView : SearchView
 
     companion object {
         fun openActivity(context: Context): Intent = Intent(context, HomeActivity::class.java)
@@ -38,6 +42,28 @@ class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>() {
             }
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_item, menu)
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        searchView = menu?.findItem(R.id.search)?.actionView as SearchView
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        searchView.maxWidth = Int.MAX_VALUE
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                mAdapter.filter.filter(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                mAdapter.filter.filter(newText)
+                return false
+            }
+        })
+
+        return true
+    }
+
 
     private fun clickDetailPokemon(pokemon: Pokemon) {
         val intent = Intent(this, DetailsActivity::class.java)

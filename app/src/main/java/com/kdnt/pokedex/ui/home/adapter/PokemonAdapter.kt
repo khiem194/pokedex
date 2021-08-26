@@ -2,18 +2,22 @@ package com.kdnt.pokedex.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kdnt.pokedex.data.model.Pokemon
 import com.kdnt.pokedex.databinding.ItemPokemonBinding
 
-class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() {
+class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>(), Filterable {
     private var mListPokemon = mutableListOf<Pokemon>()
+    var pokemonListFiltered = mutableListOf<Pokemon>()
     var onClickItemPokemon: ((pokemon: Pokemon) -> Unit)? = null
 
     fun setData(list: MutableList<Pokemon>) {
         mListPokemon.clear()
         mListPokemon.addAll(list)
+        pokemonListFiltered = mListPokemon
         notifyDataSetChanged()
     }
 
@@ -42,5 +46,33 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() 
 
     class PokemonViewHolder(val binding: ItemPokemonBinding) :
         RecyclerView.ViewHolder(binding.root)
+
+    override fun getFilter(): Filter {
+       return object : Filter(){
+           override fun performFiltering(constraint: CharSequence?): FilterResults {
+               val strSearch = constraint.toString()
+               pokemonListFiltered = if (strSearch.isEmpty()) mListPokemon else {
+                   val filteredList = ArrayList<Pokemon>()
+                   mListPokemon
+                       .filter {
+                           (it.name.contains(constraint!!))
+
+                       }
+                       .forEach { filteredList.add(it) }
+                   filteredList
+
+               }
+               return FilterResults().apply { values = pokemonListFiltered }
+           }
+
+           override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+               pokemonListFiltered = if (results?.values == null)
+                   ArrayList()
+               else
+                   results.values as ArrayList<Pokemon>
+               notifyDataSetChanged()
+           }
+       }
+    }
 
 }

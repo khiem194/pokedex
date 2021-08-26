@@ -50,10 +50,10 @@
                     android:gravity="center"
                     android:maxLines="1"
                     android:padding="12dp"
+                    android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textAllCaps="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -65,11 +65,11 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/type1"
-            android:padding="10dp"
-            android:background="@drawable/bg_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:background="@drawable/bg_type"
+            android:padding="10dp"
             android:textColor="@color/white"
             android:textSize="21sp"
             android:textStyle="bold"
@@ -81,14 +81,14 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/type2"
-            android:background="@drawable/bg_type"
-            android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_type"
+            android:padding="10dp"
             android:textColor="@color/white"
             android:textSize="21sp"
             android:textStyle="bold"
-            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/weight"
@@ -138,12 +138,198 @@
             android:id="@+id/height_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/height"
             android:layout_marginTop="10dp"
+            android:text="@string/height"
             android:textColor="#C3C0C0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/weight"
             app:layout_constraintTop_toBottomOf="@id/height" />
 
+        <ProgressBar
+            android:id="@+id/progress_hp"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:max="300"
+            android:layout_marginEnd="10dp"
+            android:progressDrawable="@drawable/custom_progressbar"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_hp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="@+id/tv_hp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_attack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hp"
+            android:text="@string/atk"
+            />
+
+        <ProgressBar
+            android:id="@+id/progress_atk"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:max="300"
+            android:progressDrawable="@drawable/custom_progressbar"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_attack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hp"
+            android:layout_marginEnd="10dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_defense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_attack"
+            android:text="@string/def"/>
+
+        <ProgressBar
+            android:id="@+id/progress_def"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:max="300"
+            android:progressDrawable="@drawable/custom_progressbar"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_defense"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_attack"
+            android:layout_marginEnd="10dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_spc_atk"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_defense"
+            android:text="@string/spc_atk" />
+
+        <ProgressBar
+            android:id="@+id/progress_special_attack"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:max="300"
+            android:progressDrawable="@drawable/custom_progressbar"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_spc_atk"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_defense"
+            android:layout_marginEnd="10dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_spc_def"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_spc_atk"
+            android:text="@string/spc_def" />
+
+        <ProgressBar
+            android:id="@+id/progress_special_defense"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:max="300"
+            android:progressDrawable="@drawable/custom_progressbar"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_spc_def"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_spc_atk"
+            android:layout_marginEnd="10dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_speed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_spc_def"
+            android:text="@string/speed"/>
+
+        <ProgressBar
+            android:id="@+id/progress_speed"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:max="300"
+            android:progressDrawable="@drawable/custom_progressbar"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_speed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_spc_def"
+            android:layout_marginEnd="10dp"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="106dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_base_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/base_start"
+            android:textAllCaps="true"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/weight_title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_hp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/hp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/progress_hp"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_base_start" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

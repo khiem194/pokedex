@@ -11,7 +11,7 @@ import retrofit2.http.Query
 interface ApiPokemonService {
     @GET("pokemon")
     fun getPokemonList(
-        @Query("limit") limit: Int = 10,
+        @Query("limit") limit: Int = 1000,
         @Query("offset") offset: Int = 0
     ): Observable<ListPokemon>
 

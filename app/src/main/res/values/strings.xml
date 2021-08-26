@@ -5,4 +5,12 @@
     <string name="powered_by_kdnt">com.kdnt.pokedex</string>
     <string name="weight">Weight</string>
     <string name="height">Height</string>
+    <string name="atk">ATK</string>
+    <string name="def">DEF</string>
+    <string name="spc_atk">SPC-ATK</string>
+    <string name="spc_def">SPC-DEF</string>
+    <string name="speed">SPEED</string>
+    <string name="base_start">Base Start</string>
+    <string name="hp">HP</string>
+    <string name="search">Search</string>
 </resources>
