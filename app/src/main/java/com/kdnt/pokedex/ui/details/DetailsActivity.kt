@@ -18,12 +18,11 @@ class DetailsActivity : BaseActivity<DetailsViewModel, ActivityDetailsBinding>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val pokemon = intent.extras?.get("id") as Pokemon
+        mViewModel.getInfoPokemon(pokemon.name)
         title = pokemon.name
-        mViewModel.getInfoPokemon(pokemon.name) { pokemonInfo ->
-            runOnUiThread {
-                setInfoPokemon(pokemonInfo)
-            }
-        }
+        mViewModel.getPokemonInfoLiveData().observe(this, { pokemonInfo ->
+            setInfoPokemon(pokemonInfo)
+        })
     }
 
     private fun setInfoPokemon(pokemonInfo: PokemonInfo) {
@@ -35,11 +34,10 @@ class DetailsActivity : BaseActivity<DetailsViewModel, ActivityDetailsBinding>()
         Glide.with(this).load(pokemonInfo.getImageUrl()).thumbnail(0.1f).into(mViewBinding.image)
         val arr = pokemonInfo.types
         Log.d("infoPoke", arr.size.toString())
-        if (arr.size >= 2){
+        if (arr.size >= 2) {
             mViewBinding.type1.text = pokemonInfo.types[0].type.name
             mViewBinding.type2.text = pokemonInfo.types[1].type.name
-        }
-        else if (arr.size == 1){
+        } else if (arr.size == 1) {
             Log.d("infoPoke", pokemonInfo.types.size.toString())
             mViewBinding.type1.text = pokemonInfo.types[0].type.name
             mViewBinding.type2.visibility = View.GONE

@@ -23,6 +23,7 @@ import java.text.FieldPosition
 class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>() {
     private lateinit var mAdapter: PokemonAdapter
     private lateinit var searchView: SearchView
+    private var mListPokemon = mutableListOf<Pokemon>()
 
     companion object {
         fun openActivity(context: Context): Intent = Intent(context, HomeActivity::class.java)
@@ -38,11 +39,15 @@ class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>() {
         mAdapter = PokemonAdapter()
         mAdapter.onClickItemPokemon = this::clickDetailPokemon
         mViewBinding.rcvPokemon.adapter = mAdapter
-        mViewModel.getListPokemon {
-            runOnUiThread {
-                mAdapter.setData(it)
-            }
-        }
+        mViewModel.getListPokemonLiveData().observe(this, {
+            mAdapter.setData(it)
+        })
+
+//        mViewModel.getListPokemon {
+//            runOnUiThread {
+//                mAdapter.setData(it)
+//            }
+//        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

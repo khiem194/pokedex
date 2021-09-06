@@ -8,15 +8,18 @@ import com.kdnt.pokedex.data.repository.PokedexRepository
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 
-class DetailsViewModel(val pokedexRepository: PokedexRepository) : BaseViewModel() {
+class DetailsViewModel(private val pokedexRepository: PokedexRepository) : BaseViewModel() {
     private val mInfoPokemonData: MutableLiveData<PokemonInfo> = MutableLiveData()
 
-    fun getInfoPokemon(name: String, success: (PokemonInfo) -> Unit) {
+    fun getPokemonInfoLiveData() = mInfoPokemonData
+
+    fun getInfoPokemon(name: String) {
         viewModelScope.launch {
             pokedexRepository.getPokemonInfo(name)
                 .subscribeOn(Schedulers.io())
-                .subscribe{
-                    success.invoke(it)
+                .subscribe {
+                    //success.invoke(it)
+                    mInfoPokemonData.postValue(it)
                 }
 //            val instance = RetrofitPokemon().getRetrofit().create(ApiPokemonService::class.java)
 //            instance.getPokemonInfo(name)
