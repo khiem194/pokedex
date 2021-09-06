@@ -11,13 +11,16 @@ import com.kdnt.pokedex.databinding.ItemPokemonBinding
 
 class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>(), Filterable {
     private var mListPokemon = mutableListOf<Pokemon>()
-    var pokemonListFiltered = mutableListOf<Pokemon>()
+    var pokemonListFiltered = ArrayList<Pokemon>()
     var onClickItemPokemon: ((pokemon: Pokemon) -> Unit)? = null
+
+    init {
+        pokemonListFiltered = mListPokemon as ArrayList<Pokemon>
+    }
 
     fun setData(list: MutableList<Pokemon>) {
         mListPokemon.clear()
         mListPokemon.addAll(list)
-        pokemonListFiltered = mListPokemon
         notifyDataSetChanged()
     }
 
@@ -50,26 +53,25 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>(),
     override fun getFilter(): Filter {
        return object : Filter(){
            override fun performFiltering(constraint: CharSequence?): FilterResults {
-               val strSearch = constraint.toString()
-               pokemonListFiltered = if (strSearch.isEmpty()) mListPokemon else {
-                   val filteredList = ArrayList<Pokemon>()
-                   mListPokemon
-                       .filter {
-                           (it.name.contains(constraint!!))
-
+               val charSearch = constraint.toString()
+               pokemonListFiltered = if (charSearch.isEmpty()) {
+                   mListPokemon as ArrayList<Pokemon>
+               } else {
+                   val resultList = ArrayList<Pokemon>()
+                   for (pokemon in mListPokemon) {
+                       if (pokemon.name.toLowerCase().contains(constraint.toString().toLowerCase())) {
+                           resultList.add(pokemon)
                        }
-                       .forEach { filteredList.add(it) }
-                   filteredList
-
+                   }
+                   resultList
                }
-               return FilterResults().apply { values = pokemonListFiltered }
+               val filterResults = FilterResults()
+               filterResults.values = pokemonListFiltered
+               return filterResults
            }
 
            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-               pokemonListFiltered = if (results?.values == null)
-                   ArrayList()
-               else
-                   results.values as ArrayList<Pokemon>
+               pokemonListFiltered = results?.values as ArrayList<Pokemon>
                notifyDataSetChanged()
            }
        }

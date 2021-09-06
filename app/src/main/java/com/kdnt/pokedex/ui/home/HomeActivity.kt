@@ -6,6 +6,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +22,7 @@ import java.text.FieldPosition
 
 class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>() {
     private lateinit var mAdapter: PokemonAdapter
-    private lateinit var searchView : SearchView
+    private lateinit var searchView: SearchView
 
     companion object {
         fun openActivity(context: Context): Intent = Intent(context, HomeActivity::class.java)
@@ -46,18 +48,31 @@ class HomeActivity : BaseActivity<HomeViewModel, ActivityHomeBinding>() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_item, menu)
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        searchView = menu?.findItem(R.id.search)?.actionView as SearchView
+        val item = menu?.findItem(R.id.search)
+        searchView = item?.actionView as SearchView
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.maxWidth = Int.MAX_VALUE
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                mAdapter.filter.filter(query)
-                return false
+//                mAdapter.filter.filter(query)
+                return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 mAdapter.filter.filter(newText)
                 return false
+            }
+        })
+        item.setOnActionExpandListener(object : MenuItem.OnActionExpandListener{
+            override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
+                mAdapter.filter.filter("")
+                Toast.makeText(this@HomeActivity, "Action Collapse", Toast.LENGTH_SHORT).show()
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+                Toast.makeText(this@HomeActivity, "Action Expend", Toast.LENGTH_SHORT).show()
+                return true
             }
         })
 

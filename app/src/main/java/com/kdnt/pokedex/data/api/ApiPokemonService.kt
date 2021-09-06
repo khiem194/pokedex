@@ -3,7 +3,6 @@ package com.kdnt.pokedex.data.api
 import com.kdnt.pokedex.data.model.ListPokemon
 import com.kdnt.pokedex.data.model.PokemonInfo
 import io.reactivex.Observable
-import io.reactivex.Observer
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

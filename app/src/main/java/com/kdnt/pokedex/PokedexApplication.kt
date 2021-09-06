@@ -3,6 +3,7 @@ package com.kdnt.pokedex
 import android.app.Application
 import com.chibatching.kotpref.Kotpref
 import com.kdnt.pokedex.core.logger.initLogger
+import com.kdnt.pokedex.di.networkModule
 import com.kdnt.pokedex.di.persistenceModule
 import com.kdnt.pokedex.di.repositoryModule
 import com.kdnt.pokedex.di.viewModelModule
@@ -30,6 +31,7 @@ class PokedexApplication : Application() {
             modules(persistenceModule)
             modules(repositoryModule)
             modules(viewModelModule)
+            modules(networkModule)
         }
         Kotpref.init(this)
     }
